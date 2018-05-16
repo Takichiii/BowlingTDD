@@ -24,14 +24,12 @@ public class Bowling {
 
     //stocke les valeurs des pins renversés pendant chaque roll
     public void roll(int pinsShooted) {
-        if (counterRolls >19) {
-            bonusRolls[(counterRolls) %2] = pinsShooted;
-        }
-        else {
+        if (counterRolls > 19) {
+            bonusRolls[(counterRolls) % 2] = pinsShooted;
+        } else {
             rolls[counterFrame][counterRolls % 2] = pinsShooted;
-            if (counterRolls % 2 == 1 && counterFrame<9) {
+            if (counterRolls % 2 == 1 && counterFrame < 9) {
                 counterFrame++;
-                System.out.print(counterFrame);
             }
         }
         counterRolls++;
@@ -40,37 +38,18 @@ public class Bowling {
     //Si la somme des éléments d’un tuple est 10 :
     // on ajoute à la valeur de ce tuple la valeur du premier élément du tuple suivant.
     //Si le premier élément d’un tuple vaut 10 : on ajoute à la valeur du tuple les deux prochaines valeurs
-    public int[] frameScores() {
-        for (int i = 0; i < frameScores.length ; i++) { //on s'arrête à l'avant-dernier frame
-            if ( isaSpare(rolls[i])){
-                if (counterFrame!=9) {
-                    frameScores[i] = 10 + rolls[i+1][0];
-                }else { //last frame
-                    frameScores[i] = 10 + bonusRolls[0] + bonusRolls[1];
-                }
-            }
-            else {
-                frameScores[i] = rolls[i][0] + rolls[i][1];
-            }
-            score += frameScores[i];
-        }
-
-        return frameScores;
-    }
 
     private boolean isaSpare(int[] frame) {
         return frame[0] + frame[1] == 10;
     }
 
-    public int score(){
+    public int score() {
         frameScores();
         return score;
     }
 
 
-
-    /*
-        public int[] frameScores() {
+    private void frameScores() {
         int size = frameScores.length - 1;
         for (int i = 0; i < size; i++) {
             if ( isaSpare(rolls[i]) ){
@@ -89,8 +68,6 @@ public class Bowling {
         }
         score +=frameScores[size];
 
-
-        return frameScores;
     }
-     */
+
 }
